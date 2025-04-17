@@ -3,3 +3,4 @@
 .php-cs-fixer.cache
 .docker-compose.analyse.yaml
 .docker-compose.yaml
+.phpunit.result.cache
