@@ -1,0 +1,26 @@
+{
+  "name": "azabolotnikov/asymmetric-jwt-kit",
+  "type": "library",
+  "require": {
+    "php": "^8.2",
+    "lcobucci/jwt": "^5.5",
+    "phpseclib/phpseclib": "^3.0",
+    "ext-openssl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5.30",
+    "orchestra/testbench": "^9.3",
+    "php-coveralls/php-coveralls": "^2.7"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AsymmetricJWTKit\\": "src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
