@@ -21,7 +21,9 @@ class Validator
             return false;
         }
 
-        $x5CertChain = $parsedToken->headers()->get('x5c');
+        $x5CertChain = $parsedToken
+            ->headers()
+            ->get('x5c');
 
         if (empty($x5CertChain) || !$this->isValidCertChain($x5CertChain, $rootCACertContent)) {
            return false;
@@ -33,12 +35,14 @@ class Validator
 
         $singer = new SignedWith($config->signer(), $config->verificationKey());
 
-        return $config->validator()->validate($parsedToken, $singer);
+        return $config
+            ->validator()
+            ->validate($parsedToken, $singer);
     }
 
     protected function isValidCertChain(array $x5CertChain, string $rootCACertContent): bool
     {
-        foreach ($x5CertChain  as $index => $cert) {
+        foreach ($x5CertChain as $index => $cert) {
             $currentCert = $this->wrapCertificate($cert);
 
             $nextCert = !empty($x5CertChain[$index + 1])

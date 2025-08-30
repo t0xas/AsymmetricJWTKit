@@ -2,12 +2,14 @@
 
 namespace AsymmetricJWTKit;
 
-final readonly class Config
+use AsymmetricJWTKit\DTO\CertificateOwnerDTO;
+
+readonly class Config
 {
     public function __construct(
-        public ?string $publicKey = null,
-        public ?string $privateKey = null,
-        public ?string $privateKeyPassword = null,
+        public string $pathRootSer,
+        public string $pathToCASer,
+        public CertificateOwnerDTO $owner,
     ) {
     }
 }
