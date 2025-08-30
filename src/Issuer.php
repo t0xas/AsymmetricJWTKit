@@ -8,6 +8,8 @@ use Lcobucci\JWT\Signer\Key\InMemory;
 
 class Issuer
 {
+    protected string $rootPem;
+
     public function __construct(
         protected Config $config,
     ) {
@@ -20,9 +22,16 @@ class Issuer
         return $this->generateSignedPayload($entityPrivateKey, $x5Certificates, $claims);
     }
 
+    public function getPublicCertificate(): string
+    {
+        return $this->rootPem;
+    }
+
     protected function generateCertChain(): array
     {
         [$rootPKey, $rootCsrSign, $rootPem] = $this->generateX509Cert();
+
+        $this->rootPem = $rootPem;
 
         [$intermediatePKey, $intermediateCsrSign, $intermediatePem] = $this->generateX509Cert($rootCsrSign, $rootPKey);
 
@@ -62,9 +71,9 @@ class Issuer
             'curve_name' => 'prime256v1',
         ]);
 
-        $csr = openssl_csr_new($this->config->getOwnerInformation(), $pkey);
+        $csr = openssl_csr_new($this->config->owner->getOwnerInformation(), $pkey);
 
-        $csrSign = openssl_csr_sign($csr, $prevCACert, $prevPKey ?? $pkey, 365);
+        $csrSign = openssl_csr_sign($csr, $prevCACert, $prevPKey ?? $pkey, $this->config->dayAvailable);
 
         openssl_x509_export($csrSign, $pem);
 
