@@ -12,21 +12,3 @@ Then you CA certificate open to you users for
 verification JWT token
 
 after users can validate you token by open CA root certificate
-
-### Installation
-```
- composer requiere azabolotnikov/asymmetric-jwt-kits
-```
-
-### Usage
-
-For make JWT token
-```
-app(AsymmetricDataEncoder::class)->getJwt($data);
-```
-
-For check JWT token
-
-```
-app(AsymmetricDataEncoder::class)->checkJwt($data);
-```
