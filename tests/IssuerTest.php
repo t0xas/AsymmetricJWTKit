@@ -12,8 +12,8 @@ class IssuerTest extends TestCase
     public function testEncode()
     {
         $config = new Config(
-            pathRootSer: __DIR__.DIRECTORY_SEPARATOR.'tests'. DIRECTORY_SEPARATOR . 'fixtures',
-            pathToCASer: __DIR__.DIRECTORY_SEPARATOR.'tests'. DIRECTORY_SEPARATOR . 'fixtures',
+            pathRootSer: __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'fixtures',
+            pathToCASer: __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'fixtures',
             owner: new CertificateOwnerDTO(
                 countryName: 'US',
                 stateOrProvinceName: 'CA',
@@ -26,5 +26,7 @@ class IssuerTest extends TestCase
         );
 
         $token = (new Issuer($config))->createToken();
+
+
     }
 }
